@@ -234,8 +234,49 @@
 <em>Fractal Flame Algorithm</em> Implement the <a href="http://flam3.com/flame.pdf">Fractal Flame Algorithm</a>
 </li>
 <li>
-<em>Design your own</em> If you are tired of the same old triangles and ferns, you could and should design and formalize your own IFS. Come up with an idea for a shape, derive some affine transformations for it, implement it, render it, stylize it, make something amazing. Be sure to include the mathematics you came up with in your creative process.</li>
+<em>Design your own IFS!</em> If you are tired of the same old triangles and ferns, you could and should design and formalize your own IFS. Come up with an idea for a shape, derive some affine transformations for it, implement it, render it, stylize it, make something amazing. Be sure to include the mathematics you came up with in your creative process.</li>
 </ul>
+
+<h2>
+<a id="option-h-2d-fluence-renderer" class="anchor" href="#option-h-2d-fluence-renderer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option H: 2D Fluence Renderer</h2>
+
+<p><img src="https://github.com/Bryce-Summers/Bryce-Summers.github.io/blob/master/Images/Diffuse_Fluence_Rendering.png?raw=true" alt="Diffuse 2D rendering"></p>
+
+<p>In Assignment 3 we created images based on the amount of irradiance present on visible surfaces using ray tracing. What would happen if instead we asked how much irradiance passes a given point in space? This is the fluence of a given point and is understandable when visualized in 2D space. For this extension, you can start with either your Ray tracer or your assignment 1 rasterizer, but you will be performing operations on a 2D image buffer while also needing much of the mathematics and structures of your raytracer.</p>
+
+<p>To start you off on the right track here are some great resources that you should look at:</p>
+
+<ul>
+<li><a href="https://benedikt-bitterli.me/tantalum/">Secret Life of Photons</a></li>
+<li><a href="http://zenphoton.com/">Zen Photon Garden</a></li>
+<li><a href="http://www.cs.dartmouth.edu/%7Ewjarosz/publications/jarabo14framework.html">Transient Rendering</a></li>
+</ul>
+
+<p>Here are some concrete steps and features you could implement:</p>
+
+<ul>
+<li>Light Sources : Start rays at light sources defined by a probability distribution of points, much like the light sources in p3. This will allow you to witness all 3 parts of a shadow: <a href="https://en.wikipedia.org/wiki/Umbra,_penumbra_and_antumbra">Link</a>.</li>
+<li>2D geometry : Compute the representations and intersections for 2D circles and line segments.</li>
+<li>Primary Rays: Emit rays from light sources via antialiased line rasterization via Xiaolin Wu's line algorithm. Have the lines be drawn from the initial point on the light source in a randomly distributed direction until they hit a piece of geometry or the edge of the image. Have the lines plot their interpolated irradiance in a cache. You can then map the range of energy present in the cache to colors in the image. You may want to clamp the energy values at the light source, because otherwise the rest of the scene will always be too dark due to the extreme concentration of light at the light sources.</li>
+<li>2D Spatial Data Structures: implement some 2D spatial data structures such as axis aligned bounding boxes to accelerate the 2D geometry queries. Can you find optimizations for constructing these data structures in the limited confines of the 2D plane in the visible region that were not feasible in 3D?</li>
+<li>2D BRDF's and materials: Implement absorption, refraction, reflection brdf's for the pieces of geometry.</li>
+<li>Implement Wavelength dependent refraction via the <a href="https://en.wikipedia.org/wiki/Sellmeier_equation">Sellmeier Equation</a> to achieve cool effects like in the Secret Life of Photons.</li>
+<li>Render from an svg: Work on the SVG parser pipeline to specify scenes in svg / sml that may be rendered using your fluence renderer.</li>
+<li>Correct the rasterization bias like in Secret Life of Photons.</li>
+<li>Perform the proper gamma correction. Map different </li>
+<li>
+<a href="http://www.cs.dartmouth.edu/%7Ewjarosz/publications/jarabo14framework.html">Transient Rendering</a> : Create animations of light propagating throughout a scene. Also google Ramesh Raskar and check out his work with <a href="https://www.ted.com/talks/ramesh_raskar_a_camera_that_takes_one_trillion_frames_per_second?language=en">Fempto Photography</a>
+</li>
+</ul>
+
+<h2>
+<a id="option-i-kphone-869-15-869-assignment" class="anchor" href="#option-i-kphone-869-15-869-assignment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option I: kPhone 869 (15-869 Assignment)</h2>
+
+<p><img src="http://graphics.cs.cmu.edu/courses/15869/fall2013content/article_images/6_1.jpg" alt="868p source image.">
+You could implement a simple image processing pipeline for the data produced by the image sensor of the much-anticipated kPhone 869s. (The 's' is for the student version of the phone. It is identical to the 869p, except the gradebook app has been removed, and a voice-assistant app, accessed by speaking 'Ok Yong', has been added.) The 869s has a camera, and your job is to process the data coming off the kPhone 869s's sensor to produce the highest quality image you can. In addition to implementing basic image processing of sensor outputs, you are also be responsible for controlling the focus of the camera!</p>
+
+<p>This is an assignment from Kayvon's Visual Computing Systems class 15-869 from fall of 2014.
+<a href="http://graphics.cs.cmu.edu/courses/15869/fall2014/article/3">Here is a link to the details.</a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/462cmu/asst5_gofurther">Assignment 5: Go Further</a> is maintained by <a href="https://github.com/462cmu">462cmu</a>.</span>
