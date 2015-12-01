@@ -204,6 +204,39 @@
 <em>Irradiance caching</em>.  A method that is extremely important in practice (i.e., almost all "real" renderers use it) but that we didn't have a chance to discuss in class is <em>irradiance caching</em>.  In a nutshell the idea is to say: if illumination is varying slowly, you sometimes get away with interpolating existing samples rather than generating new ones.  Exactly <em>how</em> you generate these samples (and how you interpolate them) is critical to getting good results, and plenty has been written on the subject.  But even a basic irradiance caching strategy could greatly improve the utility of your renderer, in the sense that you can get far smoother images with far fewer samples.</li>
 </ul>
 
+<h2>
+<a id="option-g-iterated-function-systems-ifs" class="anchor" href="#option-g-iterated-function-systems-ifs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option G: Iterated Function Systems (IFS)</h2>
+
+<p><img src="https://flic.kr/p/vX5Yq6" alt="Iterated Function Systems"></p>
+
+<p>You may extend your p1 rasterization program to render fractal images based on Iterated Function Systems. The main idea is that you start with a point and then repeatedly rasterize the point and then apply a distribution of affine transformations to it. This is a wonderful opportunity to create beauty from mathematics. Here are some concrete steps and features you could implement:</p>
+
+<ul>
+<li>
+<em>Sierpinski triangle</em> As a warmup you should render a simple IFS such as the <a href="https://en.wikipedia.org/wiki/Sierpinski_triangle#Chaos_game">Sierpinski Triangle</a>. You will need to modify the p1 code to drive the rendering via procedures instead of an SVG file.</li>
+<li>
+<em>Barnsley Fern</em> You can then make simple rendering of <a href="https://en.wikipedia.org/wiki/Barnsley_fern">Barnsley Ferns</a>
+</li>
+<li>
+<em>Irradiance Caching</em> If you were to simply plot each of the points, then you would end up with an image looking like a set of dots and would be limited in detail to the rasterization size of a point. Most images you will see on the internet never get past naive plotting. To combat this we can instead create a buffer and instead of plotting points as an opaque color, we plot their relative energies interpolated around the 4 pixels they are plotted upon. You can then compute colors for each pixel based on the irradiance cache's energy divided by the largest energy value. In other words we are mapping all energy values from 'black' to 'white'. You may need to think through you aesthetic sensibilities when deciding upon a background color and the colors on each end of the spectrum.</li>
+<li>
+<em>Distance Function</em> Now the question is how do we render the background in a way that is aestetically based on the IFS? One solution is to color every background pixel colors based on how far away they are from the set of points defined by the IFS. In other words the shortest distance form the background point to any point that was rasterized inside of the set. This problem is closely related to <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">voronoi diagrams</a>. Here is one efficient way to go about doing this:
+
+<ul>
+<li>Create a buffer with one value for every pixel describing how far the given location is from the IFS set. Lets call this the distance buffer.</li>
+<li>Initialize those locations with non zero energy values in the irradiance cache to have values of 0 in the distance buffer.</li>
+<li>Creatively propagate distance buffer values using an algorithm similar to flood fill and breadth first search. Every distance buffer location should propagate their own value + the distance between them and their neighboring locations to those neighboring locations that can either not been initialized yet or have distances larger than the value they would be updated to. You will need to think about which neighbors it will be most efficient to propagate values to, because you want to minimize the amount of times a given value is updated.</li>
+<li>Color background pixels using the data in the distance buffer. This a great opportunity to experiment with color gradients and interpolation between colors.</li>
+<li>Talk to Bryce and ask him questions about this option.</li>
+</ul>
+</li>
+<li>
+<em>Fractal Flame Algorithm</em> Implement the <a href="http://flam3.com/flame.pdf">Fractal Flame Algorithm</a>
+</li>
+<li>
+<em>Design your own</em> If you are tired of the same old triangles and ferns, you could and should design and formalize your own IFS. Come up with an idea for a shape, derive some affine transformations for it, implement it, render it, stylize it, make something amazing. Be sure to include the mathematics you came up with in your creative process.</li>
+</ul>
+
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/462cmu/asst5_gofurther">Assignment 5: Go Further</a> is maintained by <a href="https://github.com/462cmu">462cmu</a>.</span>
 
