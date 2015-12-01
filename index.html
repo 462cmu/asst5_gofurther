@@ -20,14 +20,14 @@
 
     <section class="main-content">
       <h1>
-<a id="assignment-5-go-further" class="anchor" href="#assignment-5-go-further" aria-hidden="true"><span class="octicon octicon-link"></span></a>Assignment 5: Go Further</h1>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h1>
 
 <p>In this final assignment, you will extend some part of the code you developed in the first part of the class in order to make it richer, more interesting, more full-featured, and more fun.  Below we have provided a large number of suggestions, with a few specific starting points.  We suggest that you stay somewhere within the vicinity of these suggestions, since your existing code will make it (<em>reasonably</em>) easy to implement many of these algorithms.  However, if you're feeling really passionate about implementing one particular graphics algorithm, we're glad to hear about it!</p>
 
 <p>Note that we are not requiring you to hit specific technical bullet points—rather, your goal should be to build a more interesting and/or full-featured tool that extends a previous assignment in fun and creative ways.  You can achieve this goal in any way you like.  In other words, we are trying to prep you for building software in the real world, where there is no pre-baked script or list of bullet points you need in order to get "points."  Also note that in many of these projects you will likely have to change some of the viewer/GUI in order to expose this new functionality to the user.  This type of coding can be tricky; if you are having trouble coming up with a good, simple way to modify the GUI, please consult with one of the TAs, who know the system well.  Also, note that code for some functionality (e.g., <a href="http://rosettacode.org/wiki/Catmull%E2%80%93Clark_subdivision_surface">Catmull-Clark subdivision</a>) is widely available on the web.  Unlike previous assignments, in this project we are <strong>encouraging you</strong> to use existing code, in order to more rapidly build up a more full-featured/interesting/fun tool.  However, we will not give you credit simply for plugging in an existing source file or library!  We want to see that you are building a whole that is greater than the sum of its parts.  So please document and credit appropriately any use of external code or libraries when you hand in the assignment.</p>
 
-<h2>
-<a id="administrative-details" class="anchor" href="#administrative-details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Administrative Details</h2>
+<h1>
+<a id="administrative-details" class="anchor" href="#administrative-details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Administrative Details</h1>
 
 <p>The official due date for your project is <strong>Friday, December 11 2015</strong>.  However, we will accept submissions without penalty up until Wednesday, December 16 2015.  No further late days will be accepted after this final cutoff date.</p>
 
@@ -52,8 +52,8 @@
 
 <p>Finally, to allow you to implement "cooler stuff," <strong>you may work with a partner if you so desire.</strong>  However, partners must be clearly indicated on your proposal statement and final project submission.</p>
 
-<h3>
-<a id="option-a-subdivision-modeler" class="anchor" href="#option-a-subdivision-modeler" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option A: Subdivision Modeler</h3>
+<h2>
+<a id="option-a-subdivision-modeler" class="anchor" href="#option-a-subdivision-modeler" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option A: Subdivision Modeler</h2>
 
 <p><img src="boxmodeling.jpg" alt="Box modeling example"></p>
 
@@ -68,8 +68,8 @@
 <li><p><em>Fast preview of subdivided surface</em>.  Also, it's worth noticing that most professional subdivision tools allow to work on a coarse "control cage" while simultaneously getting a preview of what the final subdivided surface will look like.  In other words, the user doesn't actually ever dice the surface into tiny polygons; they simply use the vertices, edges, and faces of the coarse shape as a way to manipulate the smooth subdivided surface.  It would definitely be valuable in your modeler to provide this kind of functionality, either by <a href="http://research.microsoft.com/en-us/um/people/cloop/accTOG.pdf">approximating subdivision patches with simpler surfaces</a> or simply by coming up with an intelligent scheme to update a fine subdivision mesh whenever the coarse vertices are changed.  One thing to think about here is that, even after <em>n</em> subdivision steps, each subdivided vertex has a linear relationship to the vertices in the control cage.  So, you could precompute a mapping (e.g., a matrix) from coarse positions to fine positions in order to get a fast preview (...until the connectivity of the coarse cage gets updated!).</p></li>
 </ul>
 
-<h3>
-<a id="option-b-cartoon-interpolation" class="anchor" href="#option-b-cartoon-interpolation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option B: Cartoon Interpolation</h3>
+<h2>
+<a id="option-b-cartoon-interpolation" class="anchor" href="#option-b-cartoon-interpolation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option B: Cartoon Interpolation</h2>
 
 <p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst5_images/cartooninterpolation.png" alt="Deformation of a 2D cartoon"></p>
 
@@ -96,8 +96,8 @@
 <li><a href="http://www.eng.biu.ac.il/%7Eweberof/Publications/Conformal/Controllable_Conformal_Maps_for_Shape_Deformation_and_Interpolation.pdf">Controllable Conformal Maps for Shape Deformation and Interpolation</a></li>
 </ul>
 
-<h3>
-<a id="option-c-mesh-based-dynamics" class="anchor" href="#option-c-mesh-based-dynamics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option C: Mesh-Based Dynamics</h3>
+<h2>
+<a id="option-c-mesh-based-dynamics" class="anchor" href="#option-c-mesh-based-dynamics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option C: Mesh-Based Dynamics</h2>
 
 <p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst5_images/meshdynamics.png" alt="Wave equation on surfaces"></p>
 
@@ -128,8 +128,8 @@
 <em>Improved rendering.</em>  Although animation and rendering are often treated as separate topics, there is an important interplay between the two, i.e., when developing algorithms for simulation, it is prudent to think about how this data will ultimately visualized, and how different types of simulation errors and artifacts contribute to (or detract from) the fidelity of the final rendered image.  For instance, if you wish to ray trace a displaced, rippling surface, then the interpolated surface normals will play a role in how well caustics show up (i.e., how smooth and artifact-free they are).  Likewise, if you're really interested in <em>efficiently</em> rendering caustics, you may need to modify your ray tracer to use a scheme like <a href="https://graphics.stanford.edu/courses/cs348b-03/papers/veach-chapter10.pdf">bidirectional path tracing</a>.  Alternatively, if you want to focus more on the simulation itself but bump up the visual fidelity <em>just a little bit</em>, you could implement basic <a href="https://en.wikipedia.org/wiki/Reflection_mapping">reflection mapping</a> using a cube mapped environment map.  (This is easily done in OpenGL on top of the existing viewer code.)</li>
 </ul>
 
-<h3>
-<a id="option-d-font-rendering" class="anchor" href="#option-d-font-rendering" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option D: Font Rendering</h3>
+<h2>
+<a id="option-d-font-rendering" class="anchor" href="#option-d-font-rendering" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option D: Font Rendering</h2>
 
 <p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst5_images/typography.png" alt="Gutenberg bible"></p>
 
@@ -144,8 +144,8 @@
 <li>A completely different direction you could go is to move past traditional font definitions, and develop/design your own.  For instance, what if you want animated fonts?  Or fonts that encode the random variations found in handwriting?  Can you come up with a nice representation for these "richer" fonts?  Should you still use Bézier curves?  Or, given that you already know that <strong>implicit</strong> representations lead to efficient algorithms for curve rasterization (as mentioned above), why not design a font format based on implicit representations from the ground up?  How can you respect history while still moving forward?  Can you add richness to font descriptions without abandoning important and hard-earned knowledge about things like kerning and ligatures?  Just because there's an existing standard doesn't mean you have to adhere to it forever—your job as a thinking, breathing individual is to go out into the world and innovate.</li>
 </ul>
 
-<h3>
-<a id="option-e-3d-rasterization" class="anchor" href="#option-e-3d-rasterization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option E: 3D Rasterization</h3>
+<h2>
+<a id="option-e-3d-rasterization" class="anchor" href="#option-e-3d-rasterization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option E: 3D Rasterization</h2>
 
 <p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst5_images/3drasterization.png" alt="Example of order-independent transparency"></p>
 
@@ -170,8 +170,8 @@
 
 <p>Lots of directions to consider here.  What's most exciting to you?</p>
 
-<h3>
-<a id="option-f-advanced-monte-carlo-rendering" class="anchor" href="#option-f-advanced-monte-carlo-rendering" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option F: Advanced Monte Carlo Rendering</h3>
+<h2>
+<a id="option-f-advanced-monte-carlo-rendering" class="anchor" href="#option-f-advanced-monte-carlo-rendering" aria-hidden="true"><span class="octicon octicon-link"></span></a>Option F: Advanced Monte Carlo Rendering</h2>
 
 <p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst5_images/advancedrendering.png" alt="Advanced rendering example"></p>
 
