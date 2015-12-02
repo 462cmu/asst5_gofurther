@@ -225,8 +225,8 @@
 <ul>
 <li>Create a buffer with one value for every pixel describing how far the given location is from the IFS set. Lets call this the distance buffer.</li>
 <li>Initialize those locations with non zero energy values in the irradiance cache to have values of 0 in the distance buffer.</li>
-<li>Creatively propagate distance buffer values using an algorithm similar to flood fill and breadth first search. Every distance buffer location should propagate their own value + the distance between them and their neighboring locations to those neighboring locations that can either not been initialized yet or have distances larger than the value they would be updated to. You will need to think about which neighbors it will be most efficient to propagate values to, because you want to minimize the amount of times a given value is updated.</li>
-<li>Color background pixels using the data in the distance buffer. This a great opportunity to experiment with color gradients and interpolation between colors.</li>
+<li>Creatively propagate distance buffer values using an algorithm similar to flood fill and breadth first search. Every distance buffer location should propagate a pointer to the member of the set they are closest to into their neighboring locations that either have not been initialized yet or have distances larger than the value they would be updated to. You will need to think about which neighbors it will be most efficient to propagate values to, because you want to minimize the amount of times a given value is updated.</li>
+<li>Color background pixels using the data in the distance buffer. This a great opportunity to experiment with color gradients and interpolation between colors. This is somewhat related to tone mapping.</li>
 <li>Talk to Bryce and ask him questions about this option.</li>
 </ul>
 </li>
