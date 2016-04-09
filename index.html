@@ -179,23 +179,55 @@
 
 <ul>
 <li>
-<em>Improve performance of BVH construction.</em>  For large and/or dynamic scenes, the cost of building a bounding volume hierarchy is specific.  Consider, for instance, running a large, mesh-based physical simulation of water, which you then want to ray trace in order to get beautiful caustics.  Lots of geometry changing in unpredictable ways—and <em>millions</em> of rays to properly resolve the appearance of the surface.  You could improve the performance of your renderer by implementing one of the the top modern parallel BVH build algorithms such as
+<p><em>Improve performance of BVH construction.</em>  For large and/or dynamic scenes, the cost of building a bounding volume hierarchy is specific.  Consider, for instance, running a large, mesh-based physical simulation of water, which you then want to ray trace in order to get beautiful caustics.  Lots of geometry changing in unpredictable ways—and <em>millions</em> of rays to properly resolve the appearance of the surface.  You could improve the performance of your renderer by implementing one of the the top modern parallel BVH build algorithms such as</p>
 
 <ul>
-<li><a href="http://graphics.cs.cmu.edu/projects/aac/">Efficient BVH Construction via Approximate Agglomerative Clustering</a></li>
+<li><a href="http://delivery.acm.org/10.1145/2390000/2383801/p33-karras.pdf?ip=128.237.162.63&amp;id=2383801&amp;acc=ACTIVE%20SERVICE&amp;key=A792924B58C015C1%2E5A12BE0369099858%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&amp;CFID=768881322&amp;CFTOKEN=58777656&amp;__acm__=1460177293_4beaeb6a169ba31440c963965a84773f">Maximizing Parallelism in the Construction of BVHs, Octrees, and k-d Trees</a></li>
 <li><a href="https://research.nvidia.com/publication/fast-parallel-construction-high-quality-bounding-volume-hierarchies">Fast Parallel Construction of High-Quality Bounding Volume Hierarchies</a></li>
+<li><a href="https://devblogs.nvidia.com/parallelforall/thinking-parallel-part-iii-tree-construction-gpu/">tThinking Parallel, Part III: Tree Construction on the GPU</a></li>
+</ul>
+
+<p><strong>Note</strong>: If you choose this topic, you can work based on your assignment 3's code. </p>
+
+<p>Task Decomposition:</p>
+
+<ol>
+<li><p>Implemented the Morton code based BVH construction method (which runs on CPU) described in <a href="https://devblogs.nvidia.com/parallelforall/thinking-parallel-part-iii-tree-construction-gpu/">Thinking Parallel, Part III: Tree Construction on the GPU</a></p></li>
+<li><p>Implement the parallel binary radix tree(BRT) construction algorithm as proposed in Karras, Tero. <a href="http://delivery.acm.org/10.1145/2390000/2383801/p33-karras.pdf?ip=128.237.162.63&amp;id=2383801&amp;acc=ACTIVE%20SERVICE&amp;key=A792924B58C015C1%2E5A12BE0369099858%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&amp;CFID=768881322&amp;CFTOKEN=58777656&amp;__acm__=1460177293_4beaeb6a169ba31440c963965a84773f">Maximizing Parallelism in the Construction of BVHs, Octrees, and k-d Trees</a> for general BRT construction</p></li>
+<li><p>implemented the parallel algorithm for BVH construction based on BRT construction algorithm, which augments it by adding a bottom-up parallel bounding box construction phase as described in the previous paper.</p></li>
+</ol>
+</li>
+<li><p><em>Improve performance of ray tracing.</em>  There are also plenty of opportunities to improve the performance of the ray tracing itself.  One possibility is to implement fast packet-based ray tracing a la the method described in, <a href="http://graphics.stanford.edu/%7Eboulos/papers/togbvh.pdf">"Ray Tracing Deformable Scenes using Dynamic Bounding Volume Hierarchies"</a>.</p></li>
+<li>
+<p><em>SPH Fluid Simulation</em>. Fluid simulation and rendering enhances the immersive experience of interactive applications like video games and movies. Among many approaches, Smoothed Particle Hydrodynamics(SPH) is arguably the easiest one to implement. In this task, you will need to simulate the fluids particles using SPH model, then reconstruct triangle meshes from the discrete particles using <em>Marching Cubes</em> algorithm. If you want, you can render the scene using some graphics APIs like OpenGL and DirectX. Then you will be surprised by how beautiful the result is. References include:</p>
+
+<ul>
+<li>Smoothed Particle Hydrodynamics
+
+<ul>
+<li><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.121.844&amp;rep=rep1&amp;type=pdf">Particle-based fluid simulation for interactive applications</a></li>
+<li><a href="https://software.intel.com/en-us/articles/fluid-simulation-for-video-games-part-1">Fluid Simulation for Video Games (part 1)</a></li>
+<li><a href="https://software.intel.com/en-us/articles/fluid-simulation-for-video-games-part-2">Fluid Simulation for Video Games (part 2)</a></li>
 </ul>
 </li>
-<li>
-<em>Improve performance of ray tracing.</em>  There are also plenty of opportunities to improve the performance of the ray tracing itself.  One possibility is to implement fast packet-based ray tracing a la the method described in, <a href="http://graphics.stanford.edu/%7Eboulos/papers/togbvh.pdf">"Ray Tracing Deformable Scenes using Dynamic Bounding Volume Hierarchies"</a>.</li>
-<li>
-<em>SPH Fluid Simulation</em>. Fluid simulation and rendering enhances the immersive experience of interactive applications like video games and movies. Among many approaches, Smoothed Particle Hydrodynamics(SPH) is arguably the easiest one to implement. The typical SPH-based method includes: simulate the fluids using SPH, reconstruct triangle meshes from the particles using <em>Marching Cubes</em> algorithm and apply some shaders to it. Then you will be surprised by how beautiful the result is. Some references includes:
+<li>Marching Cube Algorithm
 
 <ul>
-<li><a href="http://delivery.acm.org/10.1145/850000/846298/p154-muller.pdf?ip=128.237.162.249&amp;id=846298&amp;acc=ACTIVE%20SERVICE&amp;key=A792924B58C015C1%2E5A12BE0369099858%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&amp;CFID=595601341&amp;CFTOKEN=25015880&amp;__acm__=1459228846_6eb0c34510aab489e5348dd6baaf7a88">Particle-based fluid simulation for interactive applications</a></li>
-<li><a href="http://www.eecs.berkeley.edu/%7Ejrs/meshpapers/LorensenCline.pdf">MARCHING CUBES: A HIGH RESOLUTION
-3D SURFACE CONSTRUCTION ALGORITHM </a></li>
+<li><a href="http://www.eecs.berkeley.edu/%7Ejrs/meshpapers/LorensenCline.pdf">Marching Cubes: A high resolution 3D surface construction algorithm </a></li>
 </ul>
+</li>
+<li><a href="http://www.opengl-tutorial.org/beginners-tutorials/">OpenGL Tutorial</a></li>
+</ul>
+
+<p><strong>Note</strong>: If you choose this topic, we expect you to write everything from scratch. (chanllenging but a lot of fun). </p>
+
+<p>Tasks Decomposition:</p>
+
+<ol>
+<li><p>Implment SPH model to update particle positions/velocities. (At this stage, you can visualize the result by plotting the particles in matlab.)</p></li>
+<li><p>Implement Marching Cube algorithm to reconstruct triangle mehes</p></li>
+<li><p>Rendering the fluid using OpenGL/DirectX</p></li>
+</ol>
 </li>
 </ul>
 
