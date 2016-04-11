@@ -20,9 +20,6 @@
 
     <section class="main-content">
       <h1>
-<a id="-overview" class="anchor" href="#-overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a># Overview</h1>
-
-<h1>
 <a id="administrative-details" class="anchor" href="#administrative-details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Administrative Details</h1>
 
 <p>The official due date for your project is <strong>Wed 2016-04-27</strong>. A proposal for your project must be submitted by <strong>2016-04-20</strong>.  In particular, the proposal should:</p>
@@ -49,30 +46,9 @@
 <h2>
 <a id="option-b-cartoon-interpolation" class="anchor" href="#option-b-cartoon-interpolation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Option B: Cartoon Interpolation</h2>
 
-<p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst5_images/cartooninterpolation.png" alt="Deformation of a 2D cartoon"></p>
+<p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst4_images/Animator.jpg" alt="image"></p>
 
-<p>All of the characters in our 2D animation assignment were drawn as a jumble of disconnected shapes (ellipses, rectangles, polygons, etc.).  For instance, an arm might have been described as a pair of boxes connected by a hinge.  In a real character, of course, you might want a continuous bend at the elbow.  The goal of this project is to enrich the kind of character the system can draw, focusing in particular on continuous deformations.  Here are a couple nice demos of this kind of system:</p>
-
-<ul>
-<li><a href="http://esotericsoftware.com">Spine</a></li>
-<li><a href="http://cauchy.ch/animato/#/">Animato</a></li>
-</ul>
-
-<p>There are many ways to approach this kind of deformation, many of which can be built on top of the 2D animation code your wrote in your previous assignment.  The simplest way would be to load up an SVG file that contains (i) an image, and (ii) a polygon sitting on top of the image that describes a rough outline or "cage."  The user will manipulate the vertices of the cage, and the system will warp the image in some nice way to produce a continuous deformation of the character.  By animating the polygon vertices, the character can then be animated over time, like any other character in your current system.  (We would advise that you <em>add</em> this functionality on top of existing characters, since these simpler characters may still prove useful for other animation tasks.)</p>
-
-<p>So, how do you deform an image according to a polygon?  If your polygon were a triangle, it would be easy: just use linear inteprolation!  For general polygons, there is no one simple answer—in fact, there are a large number of techniques each with different pros and cons.  In some sense, all of these methods are attempting to generalize the notion of <em>barycentric coordinates</em>, i.e., how can an arbitrary point on the interior of the polygon be expressed as a combination of the locations of the polygon vertices?  Once you know the answer to this question, deforming the image becomes straightforward.  The simplest way, perhaps, is to tessellate the control polygon into many small triangles; the vertices of the fine triangulation can be updated using the cartoon interpolation scheme, and then the image can be interpolated linearly inside each small triangle (this approach is quite easy to implement in OpenGL).  However, each cartoon interpolation method will have slightly different details and requirements.  Here are a few documents that provide good starting points—some of these papers are quite advanced, but should give a sense of what's possible.  The first link gives a pretty good overview of current methods.  The most useful parts to read are the "Introduction" and "Related Work" sections, which will give you some sense of which <em>other</em> methods are out there, and what might be easiest to implement for your project:</p>
-
-<ul>
-<li>
-<a href="http://skinning.org">Skinning: Real-time Shape Deformation</a> - overview course from SIGGRAPH Asia 2014 / SGP 2015</li>
-<li>
-<a href="http://www.inf.usi.ch/hormann/barycentric/Hormann.pdf">Generalized Barycentric Coordinates</a> - some overview slides by Kai Hormann (image warping example near the end)</li>
-<li><a href="http://igl.ethz.ch/projects/bbw/">Bounded Biharmonic Weights for Real-Time Deformation</a></li>
-<li><a href="http://igl.ethz.ch/projects/monotonic/">Smooth Shape-Aware Functions with Controlled Extrema</a></li>
-<li><a href="http://www.eng.biu.ac.il/%7Eweberof/Publications/QC-Interpolation/qc-interpolation.pdf">Planar Shape Interpolation with Bounded Distortion</a></li>
-<li><a href="https://people.mpi-inf.mpg.de/%7Echen/papers/bdhm.pdf">Bounded Distortion Harmonic Mappings in the Plane</a></li>
-<li><a href="http://www.eng.biu.ac.il/%7Eweberof/Publications/Conformal/Controllable_Conformal_Maps_for_Shape_Deformation_and_Interpolation.pdf">Controllable Conformal Maps for Shape Deformation and Interpolation</a></li>
-</ul>
+<p>This is the official assignement 4 for the previous semester. See more details <a href="http://462cmu.github.io/asst4_animation/">here</a>.</p>
 
 <h2>
 <a id="option-d-font-rendering" class="anchor" href="#option-d-font-rendering" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Option D: Font Rendering</h2>
