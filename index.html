@@ -91,32 +91,6 @@
 </ol>
 
 <h2>
-<a id="option-e-3d-rasterization" class="anchor" href="#option-e-3d-rasterization" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Option E: 3D Rasterization</h2>
-
-<p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst5_images/3drasterization.png" alt="Example of order-independent transparency"></p>
-
-<p>Your first assignment focused primarily on 2D rasterization, but isn't so far from a full-blown 3D rasterization pipeline.  One possible extension for your final assignment is to implement a more full-featured 3D rasterization engine, in the spirit of OpenGL.  Additional features to consider might include:</p>
-
-<ul>
-<li>implement the camera projection matrix</li>
-<li>implement the viewing transform</li>
-<li>perform perspective-correct attribute interpolation (color, texture coordinates, etc.)</li>
-<li>implement <a href="https://en.wikipedia.org/wiki/Z-buffering">depth testing</a> by adding a Z-buffer</li>
-<li>implement <a href="https://en.wikipedia.org/wiki/Order-independent_transparency">order-independent transparency</a> using an A-buffer</li>
-<li>implement simple per-pixel lighting/shading</li>
-<li>
-<em>advanced:</em> implement shadow mapping</li>
-<li>
-<em>advanced:</em> add trilinear filtering (small change from your assignment 1 implementation to get the partial right)</li>
-</ul>
-
-<p>Overall, a fun question to think about is: what features can you implement in a software rasterizer that you <em>cannot</em> (easily) implement in a hardware rasterizer.  Roughly speaking, modern graphics hardware is designed around a restricted set of rasterization features that were deemed to be important by the OpenGL standards board.  As a consequence, it can be tricky to do things like implement an A-buffer, which is not directly supported by the hardware.  But that doesn't mean OpenGL represents the "one true way" to design a rasterizer.  How does rasterization change in various scenarios?  Does virtual reality (VR) present new challenges for rasterization that don't show up in the traditional pipeline?</p>
-
-<p>Also, what about geometric primitives other than triangles?  Graphics hardware is mainly a "triangle machine," meaning that even when you draw a quad, a polygon, and even a point, it gets diced into triangles before being sent to the hardware.  The reason is chip area: if you can build one little piece of hardware that renders triangles, and render everything else in terms of triangles, then you can print a much smaller silicon wafer.  Software rasterizers are fun because they don't inherently have this restriction (i.e., you're not designing a chip, so you don't care about die area!).  So: what other primitives can you rasterize?  Interestingly enough, early NVIDIA chips supported direct rasterization of <a href="http://shaunramsey.com/research/bp/">bilinear patches</a>.  There are likewise algorithms for <a href="https://www.google.com/?gws_rd=ssl#q=ray+tracing+bezier+patches">visualizing higher-order Bézier patches</a> or <a href="https://www.google.com/search?client=safari&amp;rls=en&amp;q=ray+tracing+subdivision+surfaces&amp;ie=UTF-8&amp;oe=UTF-8">subdivision surfaces</a> using (you guessed it) ray tracing.  Much like high-performance algorithms for triangle rendering, the idea is to rasterize some region bounding (the projection of) a primitive like a Bézier patch, and then do a ray intersection with an implicit description of the patch to determine visibility, shading, etc.  The (<em>potential</em>) advantage from a systems point of view is that you don't have to dice patches into tiny little triangles, which means you don't have to waste as much bandwidth pushing all this data through the pipeline.</p>
-
-<p>Lots of directions to consider here.  What's most exciting to you?</p>
-
-<h2>
 <a id="option-f-advanced-rendering-and-simulation" class="anchor" href="#option-f-advanced-rendering-and-simulation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Option F: Advanced Rendering and Simulation</h2>
 
 <p><img src="http://15462.courses.cs.cmu.edu/fall2015content/misc/asst5_images/advancedrendering.png" alt="Advanced rendering example"></p>
@@ -210,38 +184,6 @@
 <li>
 <em>Design your own IFS!</em> If you are tired of the same old triangles and ferns, you could and should design and formalize your own IFS. Come up with an idea for a shape, derive some affine transformations for it, implement it, render it, stylize it, make something amazing. Be sure to include the mathematics you came up with in your creative process.</li>
 </ol>
-
-<h2>
-<a id="option-h-2d-fluence-renderer" class="anchor" href="#option-h-2d-fluence-renderer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Option H: 2D Fluence Renderer</h2>
-
-<p><img src="https://github.com/Bryce-Summers/Bryce-Summers.github.io/blob/master/Images/Diffuse_Fluence_Rendering.png?raw=true" alt="Diffuse 2D rendering"></p>
-
-<p>In Assignment 3 we created images based on the amount of irradiance present on visible surfaces using ray tracing. What would happen if instead we asked how much irradiance passes a given point in space? This is the fluence of a given point and is understandable when visualized in 2D space. For this extension, you can start with either your Ray tracer or your assignment 1 rasterizer, but you will be performing operations on a 2D image buffer while also needing much of the mathematics and structures of your raytracer.</p>
-
-<p>To start you off on the right track here are some great resources that you should look at:</p>
-
-<ul>
-<li><a href="https://benedikt-bitterli.me/tantalum/">Secret Life of Photons</a></li>
-<li><a href="http://zenphoton.com/">Zen Photon Garden</a></li>
-<li><a href="http://www.cs.dartmouth.edu/%7Ewjarosz/publications/jarabo14framework.html">Transient Rendering</a></li>
-</ul>
-
-<p>Here are some concrete steps and features you could implement:</p>
-
-<ul>
-<li>Light Sources : Start rays at light sources defined by a probability distribution of points, much like the light sources in p3. This will allow you to witness all 3 parts of a shadow: <a href="https://en.wikipedia.org/wiki/Umbra,_penumbra_and_antumbra">Link</a>.</li>
-<li>2D geometry : Compute the representations and intersections for 2D circles and line segments.</li>
-<li>Primary Rays: Emit rays from light sources via antialiased line rasterization via Xiaolin Wu's line algorithm. Have the lines be drawn from the initial point on the light source in a randomly distributed direction until they hit a piece of geometry or the edge of the image. Have the lines plot their interpolated irradiance in a cache. You can then map the range of energy present in the cache to colors in the image. You may want to clamp the energy values at the light source, because otherwise the rest of the scene will always be too dark due to the extreme concentration of light at the light sources.</li>
-<li>2D Spatial Data Structures: implement some 2D spatial data structures such as axis aligned bounding boxes to accelerate the 2D geometry queries. Can you find optimizations for constructing these data structures in the limited confines of the 2D plane in the visible region that were not feasible in 3D?</li>
-<li>2D BRDF's and materials: Implement absorption, refraction, reflection brdf's for the pieces of geometry.</li>
-<li>Implement Wavelength dependent refraction via the <a href="https://en.wikipedia.org/wiki/Sellmeier_equation">Sellmeier Equation</a> to achieve cool effects like in the Secret Life of Photons.</li>
-<li>Render from an svg: Work on the SVG parser pipeline to specify scenes in svg / sml that may be rendered using your fluence renderer.</li>
-<li>Correct the rasterization bias like in Secret Life of Photons.</li>
-<li>Perform the proper gamma correction. Map different </li>
-<li>
-<a href="http://www.cs.dartmouth.edu/%7Ewjarosz/publications/jarabo14framework.html">Transient Rendering</a> : Create animations of light propagating throughout a scene. Also google Ramesh Raskar and check out his work with <a href="https://www.ted.com/talks/ramesh_raskar_a_camera_that_takes_one_trillion_frames_per_second?language=en">Fempto Photography</a>
-</li>
-</ul>
 
 <h2>
 <a id="option-i-kphone-869-15-869-assignment" class="anchor" href="#option-i-kphone-869-15-869-assignment" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Option I: kPhone 869 (15-869 Assignment)</h2>
