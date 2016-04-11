@@ -238,7 +238,7 @@
 <li>
 <em>Barnsley Fern</em> You can then make simple renderings of <a href="https://en.wikipedia.org/wiki/Barnsley_fern">Barnsley Ferns</a>
 </li>
-<li>You might want to extend the SVG for representing IFS based files. You would then need to extend other relevant functions such as the file parser.</li>
+<li>Extend the SVG for representing IFS based files. You would then need to extend other relevant functions such as the file parser.</li>
 <li>
 <em>Irradiance Caching</em> If you were to simply plot each of the points, then you would end up with an image looking like a set of dots and would be limited in detail to the rasterization size of a point. Most images you will see on the internet never get past naive plotting. To combat this we can instead create a buffer and instead of plotting points as an opaque color, we plot their relative energies interpolated around the 4 pixels they are plotted upon. You can then compute colors for each pixel based on the irradiance cache's energy divided by the largest energy value. In other words we are mapping all energy values from 'black' to 'white'. You may need to think through you aesthetic sensibilities when deciding upon a background color and the colors on each end of the spectrum.</li>
 <li>
@@ -257,10 +257,6 @@
 </li>
 <li>
 <em>Design your own IFS!</em> If you are tired of the same old triangles and ferns, you could and should design and formalize your own IFS. Come up with an idea for a shape, derive some affine transformations for it, implement it, render it, stylize it, make something amazing. Be sure to include the mathematics you came up with in your creative process.</li>
-<li>
-<em>Animate your IFS!</em> Create an animation by slowly changing the ifs parameters. You could even support IFS's in your p4 Key Framed Animator!</li>
-<li>
-<em>Parallelize your IFS</em> Speed up the performance of your IFS rasterizer by parallelizing portions of the computation. Can you implement some of the algorithms in a lock free manner?</li>
 </ol>
 
 <h2>
